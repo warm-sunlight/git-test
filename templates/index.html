@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo Demo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>待办清单</h1>
+        <p class="subtitle">机器视觉课程</p>
+
+        <form action="{{ url_for('add_todo') }}" method="post" class="todo-form">
+            <input
+                type="text"
+                name="content"
+                placeholder="请输入待办事项"
+                required
+            >
+            <button type="submit">添加</button>
+        </form>
+
+        <div class="todo-list">
+            {% if todos %}
+                <ul>
+                    {% for todo in todos %}
+                        <li>{{ todo }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="empty-text">还没有待办事项，先添加一条吧。</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
